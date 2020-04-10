@@ -1,0 +1,9 @@
+[package]
+name = "djb2"
+version = "0.2.0"
+authors = ["fridtjof <2780577+fridtjof@users.noreply.github.com>"]
+
+[lib]
+crate-type=["staticlib", "dylib", "rlib"]
+
+[dependencies]
