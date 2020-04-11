@@ -1,6 +1,3 @@
-use std::os::raw::c_char;
-use std::ffi::CStr;
-
 pub fn djb2(input: &str) -> u32 {
 	let mut hash: u32 = 0xFFFFFFFF;
 
@@ -18,6 +15,7 @@ pub fn djb2_iter(input: &str) -> u32 {
 		(n as u32).wrapping_add(33_u32.wrapping_mul(acc))
 	})
 }
+
 pub fn djb2u8(input: &[u8]) -> u32 {
 	let mut hash: u32 = 0xFFFFFFFF;
 
@@ -33,11 +31,26 @@ pub fn djb2_upper(input: &str) -> u32 {
 	djb2(input.to_ascii_uppercase().as_str())
 }
 
-#[no_mangle]
-pub extern "C" fn djb2_unsafe(input: *const c_char) -> u32 {
-	let c_str = unsafe { CStr::from_ptr(input).to_string_lossy().into_owned() };
+pub mod bindings {
+	use super::{djb2 as safe_djb2, djb2_upper as safe_djb2_upper};
 
-	djb2(&c_str)
+
+	use std::os::raw::c_char;
+	use std::ffi::CStr;
+
+	#[no_mangle]
+	pub extern "C" fn djb2(input: *const c_char) -> u32 {
+		let c_str = unsafe { CStr::from_ptr(input).to_string_lossy().into_owned() };
+
+		safe_djb2(&c_str)
+	}
+
+	#[no_mangle]
+	pub extern "C" fn djb2_upper(input: *const c_char) -> u32 {
+		let c_str = unsafe { CStr::from_ptr(input).to_string_lossy().into_owned() };
+
+		safe_djb2_upper(&c_str)
+	}
 }
 
 #[cfg(test)]
