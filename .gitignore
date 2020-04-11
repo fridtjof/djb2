@@ -1,5 +1,8 @@
 /target
 **/*.rs.bk
 
+# CLion
+/.idea
+
 # generated header
 /djb2.h
