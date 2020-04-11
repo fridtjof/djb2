@@ -8,32 +8,12 @@ pub fn djb2(input: &str) -> u32 {
 	hash
 }
 
-pub fn djb2_iter(input: &str) -> u32 {
-	let initial: u32 = 0xFFFFFFFF;
-
-	input.chars().into_iter().fold(initial, |acc, n| {
-		(n as u32).wrapping_add(33_u32.wrapping_mul(acc))
-	})
-}
-
-pub fn djb2u8(input: &[u8]) -> u32 {
-	let mut hash: u32 = 0xFFFFFFFF;
-
-	for c in input {
-		hash = (*c as u32).wrapping_add(33_u32.wrapping_mul(hash));
-	}
-
-	hash
-}
-
-
 pub fn djb2_upper(input: &str) -> u32 {
 	djb2(input.to_ascii_uppercase().as_str())
 }
 
 pub mod bindings {
 	use super::{djb2 as safe_djb2, djb2_upper as safe_djb2_upper};
-
 
 	use std::os::raw::c_char;
 	use std::ffi::CStr;
