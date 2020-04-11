@@ -44,7 +44,7 @@ pub extern "C" fn djb2_unsafe(input: *const c_char) -> u32 {
 mod tests {
 	#[test]
 	fn test_djb2() {
-		use crate::lib::{djb2, djb2_upper};
+		use super::{djb2, djb2_upper};
 
 		// U2 hashes, verified
 		assert_eq!(djb2("UNDIM_COMPLETE"), 0x0153E234);
