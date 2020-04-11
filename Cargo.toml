@@ -6,4 +6,5 @@ authors = ["fridtjof <2780577+fridtjof@users.noreply.github.com>"]
 [lib]
 crate-type=["staticlib", "dylib", "rlib"]
 
-[dependencies]
+[build-dependencies]
+cbindgen = "0.14.1"
