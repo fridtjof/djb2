@@ -1,7 +1,8 @@
 [package]
 name = "djb2"
-version = "0.2.0"
-authors = ["fridtjof <2780577+fridtjof@users.noreply.github.com>"]
+version = "0.3.0"
+authors = ["fridtjof <fridtjof@das-labor.org>"]
+license = "MIT"
 
 [lib]
 crate-type=["staticlib", "dylib", "rlib"]
